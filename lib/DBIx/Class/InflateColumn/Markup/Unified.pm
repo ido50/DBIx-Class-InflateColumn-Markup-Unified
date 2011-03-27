@@ -1,22 +1,17 @@
 package DBIx::Class::InflateColumn::Markup::Unified;
 
+# ABSTRACT: Automatically formats a text column with Textile, Markdown or BBCode.
+
 use warnings;
 use strict;
 use base qw/DBIx::Class/;
 use Markup::Unified;
 
+use version 0.77; our $VERSION = version->declare("v0.21.1");
+
 =head1 NAME
 
-DBIx::Class::InflateColumn::Markup::Unified - Automatically formats a text column
-with Textile, Markdown or BBCode.
-
-=head1 VERSION
-
-Version 0.021
-
-=cut
-
-our $VERSION = '0.021';
+DBIx::Class::InflateColumn::Markup::Unified - Automatically formats a text column with Textile, Markdown or BBCode.
 
 =head1 SYNOPSIS
 
@@ -93,7 +88,7 @@ sub register_column {
 
 =head1 AUTHOR
 
-Ido Perlmuter, C<< <ido at fc-bnei-yehuda.com> >>
+Ido Perlmuter, C<< <ido at ido50.net> >>
 
 =head1 BUGS
 
@@ -135,7 +130,7 @@ L<DBIx::Class>, L<DBIx::Class::InflateColumn>, L<Markup::Unified>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 Ido Perlmuter.
+Copyright 2009-2011 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
@@ -145,4 +140,4 @@ See http://dev.perl.org/licenses/ for more information.
 
 =cut
 
-1; # End of DBIx::Class::InflateColumn::Markup::Unified
+1;
