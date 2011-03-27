@@ -1,43 +1,98 @@
-DBIx-Class-InflateColumn-Markup-Unified
+NAME
+    DBIx::Class::InflateColumn::Markup::Unified - Automatically formats a
+    text column with Textile, Markdown or BBCode.
 
-INSTALLATION
+SYNOPSIS
+    Load this component and declare that text columns use a markup language.
+    You can either "hard code" the markup language into the column, or grab
+    it from another column in the row (must be 'markup_lang' right now).
+    This is useful if each row might use a different markup langauge.
+    Supported languages are Textile, Markdown and BBCode.
 
-To install this module, run the following commands:
+        package Posts;
+        __PACKAGE__->load_components(qw/InflateColumn::Markup Core/);
+        __PACKAGE__->add_columns(
+            text => {
+                data_type => 'TEXT',
+                is_nullable => 0,
+                is_markup => 1,
+                markup_lang => 'textile',
+            }
+        );
 
-	perl Makefile.PL
-	make
-	make test
-	make install
+        # or, alternatively
+        __PACKAGE__->add_columns(
+            text => {
+                data_type => 'TEXT',
+                is_nullable => 0,
+                is_markup => 1,
+            },
+            markup_lang => {
+                data_type => 'VARCHAR',
+                is_nullable => 0,
+                size => 60,
+            },
+        );
 
-SUPPORT AND DOCUMENTATION
+    Then, printing the column will automatically use the markup language:
 
-After installing, you can find documentation for this module with the
-perldoc command.
+        print $row->text; # automatically formats according to the markup language
 
-    perldoc DBIx::Class::InflateColumn::Markup::Unified
+        # you can also use
+        print $row->text->formatted; # again, automatically formats
+        print $row->text->unformatted; # prints the text as-is, unformatted
 
-You can also look for information at:
+METHODS
+  register_column
+    Chains with "register_column" in DBIx::Class::Row, and formats columns
+    appropriately. This would not normally be called directly by end users.
 
-    RT, CPAN's request tracker
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=DBIx-Class-InflateColumn-Markup-Unified
+AUTHOR
+    Ido Perlmuter, "<ido at ido50.net>"
 
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/DBIx-Class-InflateColumn-Markup-Unified
+BUGS
+    Please report any bugs or feature requests to
+    "bug-dbix-class-inflatecolumn-markup-unified at rt.cpan.org", or through
+    the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=DBIx-Class-InflateColumn
+    -Markup-Unified>. I will be notified, and then you'll automatically be
+    notified of progress on your bug as I make changes.
 
-    CPAN Ratings
-        http://cpanratings.perl.org/d/DBIx-Class-InflateColumn-Markup-Unified
+SUPPORT
+    You can find documentation for this module with the perldoc command.
 
-    Search CPAN
-        http://search.cpan.org/dist/DBIx-Class-InflateColumn-Markup-Unified/
+        perldoc DBIx::Class::InflateColumn::Markup::Unified
 
+    You can also look for information at:
 
-COPYRIGHT AND LICENCE
+    *   RT: CPAN's request tracker
 
-Copyright (C) 2009 Ido Perlmuter
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=DBIx-Class-InflateColumn-M
+        arkup-Unified>
 
-This program is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
+    *   AnnoCPAN: Annotated CPAN documentation
 
-See http://dev.perl.org/licenses/ for more information.
+        <http://annocpan.org/dist/DBIx-Class-InflateColumn-Markup-Unified>
+
+    *   CPAN Ratings
+
+        <http://cpanratings.perl.org/d/DBIx-Class-InflateColumn-Markup-Unifi
+        ed>
+
+    *   Search CPAN
+
+        <http://search.cpan.org/dist/DBIx-Class-InflateColumn-Markup-Unified
+        />
+
+SEE ALSO
+    DBIx::Class, DBIx::Class::InflateColumn, Markup::Unified
+
+COPYRIGHT & LICENSE
+    Copyright 2009-2011 Ido Perlmuter.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of either: the GNU General Public License as published
+    by the Free Software Foundation; or the Artistic License.
+
+    See http://dev.perl.org/licenses/ for more information.
 

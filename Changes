@@ -1,6 +1,8 @@
 Revision history for DBIx-Class-InflateColumn-Markup
 
 {{$NEXT}}
+
+v0.21.1   2011-03-27 21:01:13 Asia/Jerusalem
 	- Repackaged with Dist::Zilla
 	- Fixed bug [66982]: inc::Module::Install was not included with the distribution
 	  (now no longer needed)
